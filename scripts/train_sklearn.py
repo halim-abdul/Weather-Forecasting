@@ -26,7 +26,7 @@ def main() -> None:
 
     supervised = x.copy()
     supervised["_target"] = y
-    train, val, test = chronological_split(supervised, SplitConfig())
+    train, _, test = chronological_split(supervised, SplitConfig())
     feature_cols = [c for c in supervised.columns if c != "_target"]
 
     model = build_model(args.model)
