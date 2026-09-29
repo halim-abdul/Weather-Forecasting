@@ -4,12 +4,10 @@ from dataclasses import dataclass
 
 import numpy as np
 import pandas as pd
-from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import ExtraTreesRegressor, HistGradientBoostingRegressor, RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
 
 
 @dataclass(frozen=True)
@@ -34,13 +32,22 @@ def regression_metrics(y_true, y_pred) -> RegressionMetrics:
 def build_model(name: str = "hist_gb", random_state: int = 42):
     models = {
         "hist_gb": HistGradientBoostingRegressor(
-            learning_rate=0.05, max_iter=400, l2_regularization=1e-3, random_state=random_state
+            learning_rate=0.05,
+            max_iter=400,
+            l2_regularization=1e-3,
+            random_state=random_state,
         ),
         "random_forest": RandomForestRegressor(
-            n_estimators=500, min_samples_leaf=2, n_jobs=-1, random_state=random_state
+            n_estimators=500,
+            min_samples_leaf=2,
+            n_jobs=-1,
+            random_state=random_state,
         ),
         "extra_trees": ExtraTreesRegressor(
-            n_estimators=500, min_samples_leaf=2, n_jobs=-1, random_state=random_state
+            n_estimators=500,
+            min_samples_leaf=2,
+            n_jobs=-1,
+            random_state=random_state,
         ),
     }
     if name not in models:
